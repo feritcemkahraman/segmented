@@ -254,13 +254,22 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
     };
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
+      const isRtl = direction === 'rtl';
       switch (event.key) {
         case 'ArrowLeft':
-        case 'ArrowUp':
-          onOffset(-1);
+          event.preventDefault();
+          onOffset(isRtl ? 1 : -1);
           break;
         case 'ArrowRight':
+          event.preventDefault();
+          onOffset(isRtl ? -1 : 1);
+          break;
+        case 'ArrowUp':
+          event.preventDefault();
+          onOffset(-1);
+          break;
         case 'ArrowDown':
+          event.preventDefault();
           onOffset(1);
           break;
       }
