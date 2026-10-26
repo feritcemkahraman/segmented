@@ -248,6 +248,10 @@ const Segmented = React.forwardRef<HTMLDivElement, SegmentedProps>(
       const nextOption = validOptions[nextIndex];
 
       if (nextOption && nextOption.value !== rawValue) {
+        const optionIndex = segmentedOptions.indexOf(nextOption);
+        containerRef.current
+          ?.querySelectorAll<HTMLInputElement>(`input.${prefixCls}-item-input`)
+          [optionIndex]?.focus();
         setRawValue(nextOption.value);
         onChange?.(nextOption.value);
       }
